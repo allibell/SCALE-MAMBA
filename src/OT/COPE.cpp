@@ -7,6 +7,7 @@ All rights reserved
 
 #include "COPE.h"
 #include "LSSS/PRSS.h"
+#include <cmath>
 
 void Sender_COPE::init(Player &P, int i, unsigned int fsize, CryptoPP::RandomPool &RNG, unsigned int threadNb)
 {
@@ -96,7 +97,7 @@ void Sender_COPE::extend_vec(Player &P, vector<gfp> &x, vector<gfp> &out, bool r
     }
   unsigned int batch_size= 100000;
 
-  unsigned int nb_batches= ceil((float) out.size() / batch_size);
+  unsigned int nb_batches= std::ceil((float) out.size() / batch_size);
   for (unsigned int l= 0; l < nb_batches; l++)
     {
 
@@ -158,7 +159,7 @@ void Receiver_COPE::extend_vec(Player &P, vector<gfp> &out, bool resize)
           ROT_R[i].get_random_bits(t[k][i]);
         }
     }
-  unsigned int nb_batches= ceil((float) out.size() / batch_size);
+  unsigned int nb_batches= std::ceil((float) out.size() / batch_size);
   for (unsigned int l= 0; l < nb_batches; l++)
     {
       string ss;

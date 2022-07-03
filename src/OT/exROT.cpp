@@ -9,6 +9,7 @@ All rights reserved
 #include "COT.h"
 #include "Tools/MMO.h"
 #include "config.h"
+#include <cmath>
 
 using namespace std::chrono;
 
@@ -98,7 +99,7 @@ void exROT_Sender::next_iteration(Player &P, unsigned int size, vector<vector<gf
       aBLifted[i][1].store_into_buffer(&array1[16 * i]);
     }
 
-  unsigned int nbBlocks= ceil(static_cast<float>(size) / OT_comp_sec);
+  unsigned int nbBlocks= std::ceil(static_cast<float>(size) / OT_comp_sec);
   for (unsigned int i= 0; i < nbBlocks; i++)
     {
       mmo.hashBlockWise<gf2n, OT_comp_sec>(array0 + i * 16 * OT_comp_sec, array0 + i * 16 * OT_comp_sec);
@@ -147,7 +148,7 @@ void exROT_Receiver::next_iteration(Player &P, unsigned int size, BitVector &cho
       aBLifted[i].store_into_buffer(&array[16 * i]);
     }
 
-  unsigned int nbBlocks= ceil(static_cast<float>(size) / OT_comp_sec);
+  unsigned int nbBlocks= std::ceil(static_cast<float>(size) / OT_comp_sec);
   for (unsigned int i= 0; i < nbBlocks; i++)
     {
       mmo.hashBlockWise<gf2n, OT_comp_sec>(array + i * 16 * OT_comp_sec, array + i * 16 * OT_comp_sec);
